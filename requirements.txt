@@ -1,0 +1,5 @@
+spacy
+torch
+transformers
+scikit-learn
+tqdm
