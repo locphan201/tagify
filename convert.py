@@ -1,6 +1,7 @@
 import spacy
 import json
 from tqdm import tqdm
+import argparse
 
 nlp = spacy.load('en_core_web_sm')
 
@@ -40,11 +41,21 @@ def convert_sentence_to_json(sentences):
         results.append(result_json)
     return results
 
-def convert_one(sentence):
-    result_json = convert_sentence_to_json(sentence)
-
-    with open('result.json', 'w', encoding='utf-8') as file:
-        file.write(json.dumps(result_json, indent=4))
+def convert_stream(times):
+    while True:
+        sentence = input('\nYou: ')
+        if sentence.lower() == 'exit':
+            print('See you later')
+            break    
+    
+        result_json = convert_sentence_to_json(sentence)
+        keywords = []
+        for s in result_json:
+            keywords.extend(s['keywords'])
+        print('Labels:', keywords)
+        
+        if times != 0:
+            return
 
 def convert_all():
     with open('metadata.txt', 'r', encoding='utf-8') as file:
@@ -58,6 +69,20 @@ def convert_all():
     with open('metadata.json', 'w', encoding='utf-8') as file:
         file.write(json.dumps(result_json, indent=4))
 
+def main():
+    parser = argparse.ArgumentParser(description='Convert sentences to label json')
+    
+    parser.add_argument('--s', action='store_true', help='Convert from user inputs')
+    parser.add_argument('--all', action='store_true', help='Convert all data from metadata.txt')
+
+    args = parser.parse_args()
+
+    if args.all:
+        convert_all()
+    elif args.s:
+        convert_stream(0)
+    else:
+        convert_stream(1)
+
 if __name__ == '__main__':
-    # convert_one('A dog playing in the park')
-    convert_all()
+    main()
