@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <title>Document</title>
+</head>
+<body class="w-dvw h-dvh flex flex-col gap-5 justify-center items-center overflow-hidden py-5">
+    <div class="w-3/5 flex gap-5 justify-center items-center">
+        <textarea id="prompt" class="grow border border-black rounded-lg p-2.5" required></textarea>
+        <button class="p-2 bg-green-400 font-medium rounded-lg" onclick="compareButton()">Compare</button>
+    </div>
+
+    <h2 class="w-3/5 text-lg font-semibold">Previous</h2>
+    <div id="previous" class="w-3/5 px-5">N/A</div>
+    <h2 class="w-3/5 text-lg font-semibold">Result</h2>
+    <div id="result" class="w-3/5 grow flex flex-col px-5 overflow-y-auto overflow-x-hidden">N/A</div>
+
+    <script>
+        async function compareButton() {
+            const inputText = document.getElementById("prompt").value.trim();
+
+            if (inputText == '') {
+                return;
+            }
+
+            const response = await fetch("/compare", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    "prompt": document.getElementById("prompt").value.trim()
+                })
+            });
+            const result = await response.json();
+
+            if (!response.ok) {
+                console.error(result.error);
+                return;
+            }
+
+            document.getElementById("previous").textContent = document.getElementById("prompt").value
+            document.getElementById("prompt").value = "";
+
+            const resultList = document.getElementById("result");
+            resultList.innerHTML = "";
+
+            result.result.forEach(element => {
+                const divElement = document.createElement("div");
+                divElement.className = "w-full px-5 py-2.5 hover:bg-gray-200 cursor-pointer rounded";
+                divElement.textContent = element;
+                divElement.addEventListener("click", function() {
+                    const [videoUrl, videoDescription] =element.split(" - ");
+                    window.open(`https://www.drive.google.com/drive/search?q=${videoUrl.trim()}`, "_blank");
+                })
+
+                resultList.appendChild(divElement);
+            });
+        }
+
+        document.getElementById("prompt").addEventListener('keydown', (event) => {
+            if (event.key === 'Enter') {
+                compareButton();
+                return;
+            }
+        });
+    </script>
+</body>
+</html>

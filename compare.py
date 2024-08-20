@@ -4,7 +4,7 @@ import time
 import argparse
 
 def load_data():
-    with open('metadata.json', 'r') as f:
+    with open('metadata_sm.json', 'r') as f:
         videos = json.load(f)
     return videos
 
@@ -20,23 +20,31 @@ def compare(videos, sentence):
     for video in videos:
         points = set()
         areNounsMatched = False
-        for desc in video:
+        for desc in video['sentences']:
             for key in desc['keywords']:
                 if key in keywords:
                     points.add(key)
-            if key in desc['nouns'].keys():
+            if 'nouns' in desc.keys() and key in desc['nouns'].keys():
                 areNounsMatched = True
         
         compared.append({
-            'desc': ' '.join([desc['prompt'] for desc in video]),
-            'points': len(list(points)) if areNounsMatched else 0
+            'video': video['video'],
+            'desc': ' '.join([desc['prompt'] for desc in video['sentences']]),
+            'points': len(list(points)) if areNounsMatched or not 'nouns' in desc.keys() else 0
         })            
 
     compared.sort(key=lambda x: x['points'], reverse=True)
 
     print(keywords, '\n')
+    # max = compared[0]["points"]
+    # i = 0
+    # while compared[i]["points"] == max:
+    #     print(f'{compared[i]["video"]} - {compared[i]["desc"]}')
+    #     i += 1
+
     for i in range(5):
-        print(f'{compared[i]["points"]}pts - {compared[i]["desc"]}')
+        print(f'{compared[i]["video"]} - {compared[i]["desc"]}')
+    return compared
 
 def compare_stream(times):
     t1 = time.time()
