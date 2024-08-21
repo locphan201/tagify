@@ -1,4 +1,5 @@
 from flask import Flask, render_template, jsonify, request
+from convert import convert_sentence_to_json
 from compare import compare, load_data
 
 app = Flask(__name__)
@@ -20,8 +21,10 @@ def compare_route():
         return_data = [f'{video["video"]} - {video["desc"]}' for video in compared if video["points"] == max]
         
         # return_data = [f'{video["video"]} - {video["desc"]}' for video in compared[:10]]
-    
-        return jsonify({'result': return_data}), 200
+        keywords = []
+        for keys in convert_sentence_to_json(prompt):
+            keywords.extend(keys['keywords'])
+        return jsonify({'keywords': keywords, 'result': return_data}), 200
     except Exception as e:
         return jsonify({'error': str(e)}), 500
     

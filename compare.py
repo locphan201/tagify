@@ -4,7 +4,7 @@ import time
 import argparse
 
 def load_data():
-    with open('metadata_sm.json', 'r') as f:
+    with open('metadata.json', 'r') as f:
         videos = json.load(f)
     return videos
 
