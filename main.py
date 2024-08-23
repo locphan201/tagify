@@ -1,6 +1,6 @@
 from flask import Flask, render_template, jsonify, request
 from convert.v1 import convert_sentence_to_json
-from compare.v1 import load_data, compare
+from compare.v2 import load_data, compare
 
 app = Flask(__name__)
 
