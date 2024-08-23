@@ -80,7 +80,7 @@ from compare.v2 import load_data, compare
 
 ## Version v1
 
-This version will compare the user input to other videos in the list based on the number of matched keywords. And if there is no matched nouns, set the weight as 0 for ignoring. All the keywords are treated the same (1 point).
+This version will compare the user input to other videos in the list based on the number of matched keywords. And if there is no matched nouns, set the weight as 0 for excluding. All the keywords are treated the same (1 point).
 
 ## Version v2
 
