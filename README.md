@@ -21,9 +21,8 @@ Convert only using version `v1`
 python setup.py
 ```
 
-The project will convert `data/metadata.txt` and return a list of process prompts in json. Assume the prompt is like this `Blurred abstract round lights in blue and red tones with black or dark background.`
+The project will convert `data/metadata.txt` and return a list of process prompts in json. Assume the prompt is like this `Blurred abstract round lights in blue and red tones with black or dark background.` The prompt will be converted to a json like the example below
 
-The project will return the an json for this prompt like the example below
 ```json
 {
     "v": "mixkit_v2_00003.mp4", 
@@ -40,10 +39,14 @@ The project will return the an json for this prompt like the example below
                     ]
                 }, 
                 "tone": {
-                    "d": ["blue"]
+                    "d": [
+                        "blue"
+                    ]
                 }, 
                 "background": {
-                    "d": ["black"]
+                    "d": [
+                        "black"
+                    ]
                 }
             }, 
             "pn": [], 
@@ -53,14 +56,15 @@ The project will return the an json for this prompt like the example below
 }
 ```
 
- - `v`: video name
- - `s`: the prompt will break into small sentences.
- - `p`: prompt
- - `k`: keywords
- - `n`: nouns
- - `d`: details of the nouns
- - `pn`: pronouns
- - `act`: activities, actions of the subject
+### Note:
+ - `v`: Video filename
+ - `s`: The full prompt.
+ - `p`: Small prompt divided from the full prompt(in seperated sentences)
+ - `k`: Keywords
+ - `n`: Nouns
+ - `d`: Details of the nouns
+ - `pn`: Pronouns and special nouns
+ - `act`: Activities, actions of the subject
 
 ## Compare
 
