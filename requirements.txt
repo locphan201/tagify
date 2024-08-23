@@ -3,4 +3,4 @@ torch
 transformers
 scikit-learn
 tqdm
-argparse
+nltk
