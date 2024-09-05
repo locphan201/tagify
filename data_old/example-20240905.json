@@ -1,0 +1,66 @@
+{
+    "v": "mixkit_v2_00001.mp4",
+    "s": [
+        {
+            "p": "Aerial shot of city traffic at night.",
+            "k": [
+                "shot",
+                "city",
+                "traffic",
+                "night"
+            ],
+            "n": {
+                "shot": {
+                    "d": [
+                        "Aerial"
+                    ]
+                },
+                "city": {
+                    "d": []
+                },
+                "traffic": {
+                    "d": []
+                },
+                "night": {
+                    "d": []
+                }
+            },
+            "pn": [],
+            "act": []
+        },
+        {
+            "p": "There are intersections of large avenues, bridges and buildings with lights around.",
+            "k": [
+                "be",
+                "intersection",
+                "avenue",
+                "bridge",
+                "building",
+                "light"
+            ],
+            "n": {
+                "intersection": {
+                    "d": []
+                },
+                "avenue": {
+                    "d": [
+                        "large"
+                    ]
+                },
+                "bridge": {
+                    "d": []
+                },
+                "building": {
+                    "d": []
+                },
+                "light": {
+                    "d": []
+                }
+            },
+            "pn": [],
+            "act": [
+                "be"
+            ]
+        }
+    ]
+}

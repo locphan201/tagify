@@ -69,8 +69,6 @@
             })
             document.getElementById("history").appendChild(historyElement);
 
-
-
             document.getElementById("previous").textContent = prompt;
             document.getElementById("prompt").value = "";
 
@@ -94,7 +92,7 @@
                 divElement.className = "w-full px-5 py-2.5 hover:bg-gray-200 cursor-pointer rounded";
                 divElement.textContent = element;
                 divElement.addEventListener("click", function() {
-                    const [videoUrl, videoDescription] =element.split(" - ");
+                    const [points, videoUrl, videoDescription] =element.split(" - ");
                     window.open(`https://www.drive.google.com/drive/search?q=${videoUrl.trim()}`, "_blank");
                 })
 
