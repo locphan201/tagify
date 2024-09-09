@@ -3,7 +3,7 @@ def get_top_closest(compared):
     return_data = []
     for index, video in enumerate(compared):
         if video["p"] == max or index < 5:
-            return_data.append(f'{video["p"]}pts - {video["v"]} - {video["d"]}' )
+            return_data.append(f'{video["v"]} - {video["d"]}' )
         else:
             break
     return return_data
